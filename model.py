@@ -21,7 +21,7 @@ from dataset import load_THUCNews_title_label
 from dataset import load_weibo_senti_100k
 from dataset import load_simplifyweibo_4_moods
 
-X, y, classes = load_weibo_senti_100k()
+X, y, classes = load_THUCNews_title_label()
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=7384672)
 
 num_classes = len(classes)
@@ -29,7 +29,7 @@ tokenizer = SimpleTokenizer()
 tokenizer.fit(X_train)
 X_train = tokenizer.transform(X_train)
 
-# maxlen = 48
+maxlen = 48
 maxlen = find_best_maxlen(X_train)
 
 X_train = sequence.pad_sequences(
@@ -38,7 +38,7 @@ X_train = sequence.pad_sequences(
     dtype="int32",
     padding="post",
     truncating="post",
-    value=0
+    value=0.0
 )
 y_train = tf.keras.utils.to_categorical(y_train)
 
@@ -48,8 +48,9 @@ embedding_dims = 128
 inputs = Input(shape=(maxlen,))
 mask = Lambda(lambda x: tf.not_equal(x, 0))(inputs)
 x = Embedding(num_words, embedding_dims,
-    embeddings_initializer="glorot_normal",
-    input_length=maxlen)(inputs)
+    embeddings_initializer="normal",
+    input_length=maxlen,
+    mask_zero=True)(inputs)
 x = Dropout(0.2)(x)
 x = Conv1D(filters=128,
            kernel_size=3,
@@ -71,7 +72,7 @@ model.summary()
 model_w_outputs = Model(inputs, w)
 
 batch_size = 32
-epochs = 10
+epochs = 2
 callbacks = []
 model.fit(X_train, y_train,
           batch_size=batch_size,

@@ -7,14 +7,21 @@ import pandas as pd
 import numpy as np
 
 _THUCNews = "/home/zhiwen/workspace/dataset/THUCNews-title-label.txt"
-def load_THUCNews_title_label(file=_THUCNews):
+def load_THUCNews_title_label(file=_THUCNews, nobrackets=True):
     with open(file, encoding="utf-8") as fd:
         text = fd.read()
     lines = text.split("\n")[:-1]
+    np.random.shuffle(lines)
     titles = []
     labels = []
     for line in lines:
         title, label = line.split("\t")
+        if not title:
+            continue
+
+        # 去掉括号内容
+        if nobrackets:
+            title = re.sub("\(.+?\)", lambda x:"", title)
         titles.append(title)
         labels.append(label)
     categoricals = list(set(labels))

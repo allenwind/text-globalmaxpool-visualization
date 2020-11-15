@@ -1,6 +1,6 @@
 # text-globalmaxpool-visualization
 
-NLP中，我们常常使用AttentionPooling对词向量序列进行聚合作为句向量的表示，在[text-attentionpooling-visualization](https://github.com/allenwind/text-attentionpooling-visualization)分析过，有不错的效果。此外，还常常使用MaxPooling对词向量序列进行聚合（句向量），如Tensorflow中的`tf.keras.layers.GlobalMaxPool1D`，这里尝试可视化MaxPooling的效果。一个词向量序列可以用矩阵表示，其维度为(maxlen, hdims)，MaxPooling操作后，变为向量，可以看做句向量的表示，其维度为(1, hdims)。hdims每个值对应着某个词向量的最大值，把其作为该词在下游任务中重要性的权重，并通过可视化来观察是否具有预期的效果。
+NLP中，我们常常使用AttentionPooling对词向量序列进行聚合作为句向量的表示，在[text-attentionpooling-visualization](https://github.com/allenwind/text-attentionpooling-visualization)分析过，有不错的效果。此外，还常常使用MaxPooling和AveragePooling对词向量序列进行聚合（句向量），其中AveragePooling可以看做是AttentionPooling的特例。这里只探讨MaxPooling，如Tensorflow中的`tf.keras.layers.GlobalMaxPool1D`。这里尝试可视化MaxPooling的效果。一个词向量序列可以用矩阵表示，其维度为(maxlen, hdims)，MaxPooling操作后，变为向量，可以看做句向量的表示，其维度为(1, hdims)。hdims每个值对应着某个词向量的最大值，把其作为该词在下游任务中重要性的权重，并通过可视化来观察是否具有预期的效果。
 
 
 
