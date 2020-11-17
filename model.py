@@ -14,7 +14,7 @@ from tensorflow.keras.layers import *
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 
-from pooling import MaskGlobalMaxPooling1D
+from pooling import MaskGlobalMaxPooling1D, MaskGlobalAveragePooling1D
 from dataset import SimpleTokenizer, find_best_maxlen
 
 from dataset import load_THUCNews_title_label

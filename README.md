@@ -37,4 +37,4 @@ class MaskGlobalMaxPooling1D(tf.keras.layers.Layer):
 
 ![](asset/global_max_pool1d_2.png.png)
 
-可以看到，MaxPooling在文本问题上也是能够定位到关键信息作为分类依据。
+可以看到，MaxPooling在文本问题上也是能够定位到关键信息作为分类依据。Pooling后的句向量的每个元素能够反映其所对应的字或词的重要性。
