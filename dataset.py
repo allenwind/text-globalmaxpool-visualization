@@ -51,6 +51,20 @@ def load_THUCNews_content_label(file=_THUContent, shuffle=True):
             yield content, categoricals[label]
     return Xy_generator, files, categoricals
 
+_HOTEL = "/home/zhiwen/workspace/dataset/classification/ChnSentiCorp_htl_all/ChnSentiCorp_htl_all.csv"
+def load_hotel_comment(file=_HOTEL):
+    with open(file, encoding="utf-8") as fd:
+        lines = fd.readlines()[1:]
+    random.shuffle(lines)
+    X = []
+    y = []
+    for line in lines:
+        label, commet = line.strip().split(",", 1)
+        X.append(commet)
+        y.append(int(label))
+    categoricals = {"负面":0, "正面":1}
+    return X, y, categoricals
+
 _w100k = "/home/zhiwen/workspace/dataset/classification/weibo_senti_100k/weibo_senti_100k.csv"
 def load_weibo_senti_100k(file=_w100k, noe=False):
     df = pd.read_csv(file)

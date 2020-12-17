@@ -14,14 +14,15 @@ from tensorflow.keras.layers import *
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 
-from pooling import MaskGlobalMaxPooling1D, MaskGlobalAveragePooling1D
+from pooling import MaskGlobalMaxPooling1D
+from pooling import MaskGlobalAveragePooling1D
 from dataset import SimpleTokenizer, find_best_maxlen
-
 from dataset import load_THUCNews_title_label
 from dataset import load_weibo_senti_100k
 from dataset import load_simplifyweibo_4_moods
+from dataset import load_hotel_comment
 
-X, y, classes = load_THUCNews_title_label()
+X, y, classes = load_hotel_comment()
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=7384672)
 
 num_classes = len(classes)
@@ -78,7 +79,8 @@ model.fit(X_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           callbacks=callbacks,
-          validation_split=0.2)
+          validation_split=0.2
+)
 
 id_to_classes = {j:i for i,j in classes.items()}
 from textcolor import print_color_text
