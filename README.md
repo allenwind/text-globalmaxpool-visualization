@@ -4,6 +4,12 @@ NLP中，我们常常使用AttentionPooling对词向量序列进行聚合作为�
 
 
 
+MaskGlobalMaxPooling1D及其词权重重要性示意图（吐血绘制^^^），
+
+![](asset/global-max-pooling-vis-demo-1-1.png)
+
+
+
 带词重要性权重输出的MaskGlobalMaxPooling1D的实现：
 
 ```python
